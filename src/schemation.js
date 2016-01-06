@@ -81,8 +81,8 @@ export const validate = schema =>
 
 export const any = () => {}
 
-export const optional =
-  schema => json => undefined === json ? undefined : test(schema, json)
+export const optional = schema => json =>
+  undefined === json ? undefined : test(schema, json)
 
 export const where = predicate => json =>
   predicate(json) ? undefined : new Mismatch(json)
