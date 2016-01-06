@@ -51,6 +51,10 @@ validate(schema)(json)
 ## Mismatches
 
 ```javascript
+import {Mismatch, MismatchAt, Mismatches} from "schemation"
+```
+
+```javascript
 mismatch ::= Mismatch {value}
            | MismatchAt {mismatch, index}
            | Mismatches {mismatches}
