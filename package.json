@@ -1,0 +1,30 @@
+{
+  "name": "schemation",
+  "version": "0.1.0",
+  "description": "JSON validation",
+  "main": "lib/schemation.js",
+  "scripts": {
+    "prepublish": "npm run dist",
+    "dist": "babel src --source-maps inline --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polytypic/schemation.git"
+  },
+  "keywords": [
+    "JSON",
+    "validation",
+    "schema"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/polytypic/schemation/issues"
+  },
+  "homepage": "https://github.com/polytypic/schemation#readme",
+  "devDependencies": {
+    "babel": "^6.3.13",
+    "babel-cli": "^6.3.17",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
+    "babel-preset-es2015": "^6.3.13"
+  }
+}
