@@ -43,7 +43,7 @@ tryMatch(schema, onMatch, onMismatch)(json)
 ```javascript
 validate(schema)(json)
   => json
-   | throws
+   | throw new Error(mismatch)
 ```
 
 ## Mismatches
