@@ -48,22 +48,25 @@ function array(schema, json) {
 }
 
 function test(schema, json) {
-  switch (schema && schema.constructor) {
-  case null:
-  case String:
-  case Number:
-  case Boolean:
-    return atom(schema, json)
-  case RegExp:
-    return regexp(schema, json)
-  case Array:
-    return array(schema, json)
-  case Object:
-    return object(schema, json)
-  case Function:
-    return schema(json)
-  default:
-    throw new Error(`Unknown schema: ${json}`)
+  if (null === schema) {
+    return atom(schema, json);
+  } else {
+    switch (schema.constructor) {
+    case String:
+    case Number:
+    case Boolean:
+      return atom(schema, json)
+    case RegExp:
+      return regexp(schema, json)
+    case Array:
+      return array(schema, json)
+    case Object:
+      return object(schema, json)
+    case Function:
+      return schema(json)
+    default:
+      throw new Error(`Unknown schema: ${schema}`)
+    }
   }
 }
 
