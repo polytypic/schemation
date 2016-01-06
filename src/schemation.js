@@ -1,12 +1,12 @@
-const show = x => JSON.stringify(x)
+const show = JSON.stringify
 
 //
 
 const isBoolean = json => typeof json === "boolean"
-const isNumber = json => typeof json === "number"
-const isString = json => typeof json === "string"
-const isArray = json => json && json.constructor === Array
-const isObject = json => json && json.constructor === Object
+const isNumber  = json => typeof json === "number"
+const isString  = json => typeof json === "string"
+const isArray   = json => json && json.constructor === Array
+const isObject  = json => json && json.constructor === Object
 
 //
 
@@ -75,7 +75,7 @@ export const tryMatch = (schema, onMatch, onMismatch) => json => {
 }
 
 export const validate = schema =>
-  tryMatch(schema, x => x, m => {throw new Error(m)})
+  tryMatch(schema, json => json, m => {throw new Error(m)})
 
 //
 
@@ -88,8 +88,8 @@ export const where = predicate => json =>
   predicate(json) ? undefined : new Mismatch(json)
 
 export const boolean = where(isBoolean)
-export const number = where(isNumber)
-export const string = where(isString)
+export const number  = where(isNumber)
+export const string  = where(isString)
 
 export const or = (...schemas) => json => {
   const ms = []
