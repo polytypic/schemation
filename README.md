@@ -1,5 +1,3 @@
-JSON validation library.
-
 ## Schema grammar
 
 ```javascript
