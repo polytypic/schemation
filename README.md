@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/schemation.svg)](http://badge.fury.io/js/schemation)
+
 ## Schema grammar
 
 ```javascript
