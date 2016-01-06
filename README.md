@@ -3,7 +3,7 @@ JSON validation library.
 ## Schema grammar
 
 ```javascript
-import {and, any, boolean, not, number, optional, or, string, where, tryMatch, validate} from "schemation"
+import {and, any, boolean, not, number, optional, or, string, where} from "schemation"
 ```
 
 ```javascript
@@ -31,6 +31,10 @@ import {and, any, boolean, not, number, optional, or, string, where, tryMatch, v
 ```
 
 ## Entry points
+
+```javascript
+import {tryMatch, validate} from "schemation"
+```
 
 ```javascript
 tryMatch(schema, onMatch, onMismatch)(json)
