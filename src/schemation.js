@@ -84,12 +84,12 @@ export const any = () => {}
 export const optional =
   schema => json => undefined === json ? undefined : test(schema, json)
 
-export const when =
-  predicate => json => predicate(json) ? undefined : new Mismatch(json)
+export const where = predicate => json =>
+  predicate(json) ? undefined : new Mismatch(json)
 
-export const boolean = when(isBoolean)
-export const number = when(isNumber)
-export const string = when(isString)
+export const boolean = where(isBoolean)
+export const number = where(isNumber)
+export const string = where(isString)
 
 export const or = (...schemas) => json => {
   const ms = []
