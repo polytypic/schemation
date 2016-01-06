@@ -112,6 +112,9 @@ export const and = (...schemas) => json => {
   }
 }
 
+export const not = schema => json =>
+  test(schema, json) ? undefined : new Mismatch(json)
+
 //
 
 export function Mismatch(value) {
