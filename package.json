@@ -1,6 +1,6 @@
 {
   "name": "schemation",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JSON validation",
   "main": "lib/schemation.js",
   "scripts": {
