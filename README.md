@@ -69,7 +69,7 @@ mismatch.toString()
 For example, given
 
 ```javascript
-const empty = where(x => x.length === 0);
+const empty = where(x => x.length === 0)
 ```
 
 the expression
