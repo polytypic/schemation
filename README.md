@@ -13,6 +13,7 @@ import {and, any, boolean, not, number, optional, or, string, where} from "schem
            | and( <schema>, ... )
            | any
            | boolean
+           | lazy( () => <schema> )
            | not( <schema> )
            | number
            | or( <schema>, ... )
@@ -33,7 +34,13 @@ import {and, any, boolean, not, number, optional, or, string, where} from "schem
 ## Entry points
 
 ```javascript
-import {tryMatch, validate} from "schemation"
+import {matches, tryMatch, validate} from "schemation"
+```
+
+```javascript
+matches(schema)(json)
+  => true
+   | false
 ```
 
 ```javascript

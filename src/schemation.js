@@ -1,5 +1,5 @@
-const hasType = type => json => typeof json === type
-const constructor = json => null === json ? json : json.constructor
+const constructor = x =>
+  x === null || x === undefined ? x : Object.getPrototypeOf(x).constructor
 
 //
 
@@ -8,7 +8,13 @@ export function Mismatch(value) {
 }
 
 Mismatch.prototype.toString = function() {
-  return JSON.stringify(this.value)
+  switch (typeof this.value) {
+  case "string":
+  case "object":
+    return JSON.stringify(this.value)
+  default:
+    return `${this.value}`
+  }
 }
 
 export function MismatchAt(mismatch, index) {
@@ -33,17 +39,17 @@ Mismatches.prototype.toString = function() {
 
 //
 
-function atom(schema, json) {
+const testAtom = (schema, json) => {
   if (schema !== json)
     return new Mismatch(json)
 }
 
-function regexp(schema, json) {
+const testRegExp = (schema, json) => {
   if (constructor(json) !== String || !schema.test(json))
     return new Mismatch(json)
 }
 
-function testProp(schema, i, json) {
+const testProp = (schema, i, json) => {
   if (schema instanceof Optional) {
     if (i in json)
       return test(schema.schema, json[i])
@@ -52,7 +58,7 @@ function testProp(schema, i, json) {
   }
 }
 
-function object(schemas, json) {
+const testObject = (schemas, json) => {
   if (constructor(json) !== Object)
     return new Mismatch(json)
 
@@ -61,9 +67,10 @@ function object(schemas, json) {
     if (m)
       return new MismatchAt(m, i)
   }
+  return anyObject(json, schemas)
 }
 
-function array(schema, json) {
+const testArray = (schema, json) => {
   if (schema.length !== 1)
     throw new Error("Array literal schema must contain exactly one element")
 
@@ -72,26 +79,26 @@ function array(schema, json) {
 
   const schema0 = schema[0]
 
-  for (let i=0; i<json.length; ++i) {
+  for (let i=0, n=json.length; i<n; ++i) {
     const m = test(schema0, json[i])
     if (m)
       return new MismatchAt(m, i)
   }
 }
 
-function test(schema, json) {
+const test = (schema, json) => {
   switch (constructor(schema)) {
   case null:
   case String:
   case Number:
   case Boolean:
-    return atom(schema, json)
+    return testAtom(schema, json)
   case RegExp:
-    return regexp(schema, json)
+    return testRegExp(schema, json)
   case Array:
-    return array(schema, json)
+    return testArray(schema, json)
   case Object:
-    return object(schema, json)
+    return testObject(schema, json)
   case Function:
     return schema(json)
   default:
@@ -106,25 +113,58 @@ export const tryMatch = (schema, onMatch, onMismatch) => json => {
   return m ? onMismatch(m) : onMatch(json)
 }
 
+export const matches = schema => tryMatch(schema, () => true, () => false)
+
 export const validate = schema =>
   tryMatch(schema, json => json, m => {throw new Error(m)})
 
 //
 
-export const any = () => {}
+export const array = Object.freeze([any])
+export const object = Object.freeze({})
+
+export const anyObject = (json, ignored = object) => {
+  for (const i in json) {
+    if (i in ignored)
+      continue
+    const m = any(json[i])
+    if (m)
+      return new MismatchAt(m, i)
+  }
+}
+
+export const any = json => {
+  switch (constructor(json)) {
+  case null:
+  case String:
+  case Boolean:
+    return
+  case Number:
+    if (Number.isFinite(json))
+      return
+    break
+  case Array:
+    return testArray(array, json)
+  case Object:
+    return anyObject(json)
+  }
+  return new Mismatch(json)
+}
 
 function Optional(schema) {
   this.schema = schema
 }
+
+export const lazy = toSchema => json => test(toSchema(), json)
 
 export const optional = schema => new Optional(schema)
 
 export const where = predicate => json =>
   predicate(json) ? undefined : new Mismatch(json)
 
-export const boolean = where(hasType("boolean"))
-export const number  = where(hasType("number"))
-export const string  = where(hasType("string"))
+export const boolean = where(x => x === true || x === false)
+export const number  = where(Number.isFinite)
+export const string  = /(?:)/
 
 export const or = (...schemas) => json => {
   const ms = []

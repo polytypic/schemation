@@ -1,11 +1,13 @@
 {
   "name": "schemation",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "JSON validation",
   "main": "lib/schemation.js",
   "scripts": {
-    "prepublish": "npm run dist",
-    "dist": "babel src --source-maps inline --out-dir lib"
+    "dist": "babel src --source-maps inline --out-dir lib",
+    "lint": "eslint src test",
+    "prepublish": "npm run lint && npm run test && npm run dist",
+    "test": "node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,11 @@
   "devDependencies": {
     "babel": "^6.3.13",
     "babel-cli": "^6.3.17",
+    "babel-eslint": "^4.1.6",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.3.16",
-    "babel-preset-es2015": "^6.3.13"
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "eslint": "^1.10.3",
+    "mocha": "^2.3.4"
   }
 }
