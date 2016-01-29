@@ -10,7 +10,7 @@ import {optional}                     from "schemation"
 import {lazy}                         from "schemation"
 ```
 
-```javascript
+```jsx
    <schema> ::= <class>
               | <lazy>
               | <logical>
