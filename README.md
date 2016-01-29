@@ -3,32 +3,43 @@
 ## Schema grammar
 
 ```javascript
-import {and, any, boolean, not, number, optional, or, string, where} from "schemation"
+import {any, boolean, number, string} from "schemation"
+import {and, not, or}                 from "schemation"
+import {where}                        from "schemation"
+import {optional}                     from "schemation"
+import {lazy}                         from "schemation"
 ```
 
 ```javascript
-<schema> ::= /.../
-           | <atom>
-           | [ <schema> ]
-           | and( <schema>, ... )
-           | any
-           | boolean
-           | lazy( () => <schema> )
-           | not( <schema> )
-           | number
-           | or( <schema>, ... )
-           | string
-           | where( <predicate> )
-           | { <prop>, ... }
+   <schema> ::= <class>
+              | <lazy>
+              | <logical>
+              | <predicate>
+              | <shape>
 
-  <prop> ::= "...": <schema>
-           | "...": optional( <schema> )
+    <class> ::= any
+              | boolean
+              | number
+              | string
 
-  <atom> ::= "..."
-           | <number>
-           | false
-           | null
-           | true
+     <lazy> ::= lazy( () => <schema> )
+
+  <logical> ::= and( <schema>, ... )
+              | not( <schema> )
+              |  or( <schema>, ... )
+
+<predicate> ::= /.../
+              | where( <predicate> )
+
+    <shape> ::= false | true
+              | "..."
+              | <number>
+              | [ <schema> ]
+              | null
+              | { <property>, ... }
+
+ <property> ::= "...":           <schema>
+              | "...": optional( <schema> )
 ```
 
 ## Entry points
