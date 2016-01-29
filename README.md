@@ -29,7 +29,7 @@ import {lazy}                         from "schemation"
               |  or( <schema>, ... )
 
 <predicate> ::= /.../
-              | where( <predicate> )
+              | where( <unary-predicate> )
 
     <shape> ::= false | true
               | "..."
