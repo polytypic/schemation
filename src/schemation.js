@@ -120,7 +120,7 @@ export const validate = schema =>
 
 //
 
-export const array = Object.freeze([any])
+export const array = Object.freeze([json => any(json)])
 export const object = Object.freeze({})
 
 export const anyObject = (json, ignored = object) => {
