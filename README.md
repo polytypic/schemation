@@ -1,4 +1,4 @@
-[![npm version](https://badge.fury.io/js/schemation.svg)](http://badge.fury.io/js/schemation) [![Build Status](https://travis-ci.org/polytypic/schemation.svg?branch=master)](https://travis-ci.org/polytypic/schemation) [![](https://david-dm.org/polytypic/schemation.svg)](https://david-dm.org/polytypic/schemation) [![](https://david-dm.org/polytypic/schemation/dev-status.svg)](https://david-dm.org/polytypic/schemation#info=devDependencies)
+[![npm version](https://badge.fury.io/js/schemation.svg)](http://badge.fury.io/js/schemation) [![Build Status](https://travis-ci.org/polytypic/schemation.svg?branch=master)](https://travis-ci.org/polytypic/schemation) [![](https://david-dm.org/polytypic/schemation.svg)](https://david-dm.org/polytypic/schemation) [![](https://david-dm.org/polytypic/schemation/dev-status.svg)](https://david-dm.org/polytypic/schemation?type=dev)
 
 ## Schema grammar
 
