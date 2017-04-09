@@ -1,2 +1,9 @@
-!lib
 *~
+.babelrc
+.eslintrc
+.travis.yml
+bench
+bower.json
+docs
+scripts
+test

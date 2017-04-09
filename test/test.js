@@ -1,5 +1,5 @@
-import {and, any, number, optional, or, lazy} from "../src/schemation"
-import {tryMatch, validate} from "../src/schemation"
+import {and, any, number, optional, or, lazy} from "../dist/schemation.cjs"
+import {tryMatch, validate} from "../dist/schemation.cjs"
 
 const branch = {lhs: optional(lazy(() => branch)),
                 key: number,

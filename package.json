@@ -1,12 +1,15 @@
 {
   "name": "schemation",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "JSON validation",
-  "main": "lib/schemation.js",
+  "main": "dist/schemation.cjs.js",
+  "module": "dist/schemation.es.js",
   "scripts": {
-    "dist": "babel src --source-maps inline --out-dir lib",
+    "dist": "npm run dist:es & npm run dist:cjs & wait",
+    "dist:cjs": "    NODE_ENV=           rollup -c -n I -i src/schemation.js -f cjs -o dist/schemation.cjs.js",
+    "dist:es": "     NODE_ENV=           rollup -c -n I -i src/schemation.js -f es  -o dist/schemation.es.js",
     "lint": "eslint src test",
-    "prepublish": "npm run lint && npm run test && npm run dist",
+    "prepublish": "npm run lint && npm run dist && npm run test",
     "test": "node_modules/.bin/nyc node_modules/mocha/bin/mocha"
   },
   "repository": {
@@ -31,6 +34,10 @@
     "babel-register": "^6.24.1",
     "eslint": "^3.19.0",
     "mocha": "^3.2.0",
-    "nyc": "^10.2.0"
+    "nyc": "^10.2.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1"
   }
 }
