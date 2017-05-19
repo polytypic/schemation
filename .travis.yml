@@ -3,4 +3,6 @@ notifications:
   email: false
 before_install: npm install npm@latest -g
 node_js:
-  - "5"
+  - "6"
+  - "7"
+  - "4"
