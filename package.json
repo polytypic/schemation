@@ -9,7 +9,7 @@
     "dist:cjs": "    NODE_ENV=           rollup -c -n I -i src/schemation.js -f cjs -o dist/schemation.cjs.js",
     "dist:es": "     NODE_ENV=           rollup -c -n I -i src/schemation.js -f es  -o dist/schemation.es.js",
     "lint": "eslint src test",
-    "prepublish": "npm run lint && npm run dist && npm run test",
+    "prepare": "npm run lint && npm run dist && npm run test",
     "test": "node_modules/.bin/nyc node_modules/mocha/bin/mocha"
   },
   "repository": {
